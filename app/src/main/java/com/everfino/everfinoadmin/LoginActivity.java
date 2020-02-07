@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void admin_login() {
-        Log.e("##Input : ",edt_usernme.getText().toString()+"  "+edt_password.getText().toString());
+
         JsonObject inputData=new JsonObject();
         inputData.addProperty("username",edt_usernme.getText().toString());
         inputData.addProperty("password",edt_password.getText().toString());
