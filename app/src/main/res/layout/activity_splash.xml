@@ -1,35 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splashbackground"
+    android:orientation="vertical"
     tools:context=".SplashActivity">
 
-    <LinearLayout
-        android:weightSum="4"
+
+
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/TextView3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Everfino!"
-            android:textColor="@android:color/white"
-            android:layout_weight="1"
-            android:textSize="50dp" />
+            android:textColor="#FFFFFF"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.06"
+
+
+            />
 
         <TextView
-            android:layout_weight="1"
+            android:id="@+id/textView4"
             android:textColor="@android:color/white"
             android:text="Tagline Tagline Tagline"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Button
-            android:layout_weight="0.1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="200dp"
@@ -39,27 +55,43 @@
             android:textColor="@android:color/white"
             android:textSize="18dp" />
 
-        <LinearLayout
+
             android:layout_weight="1"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:textSize="15dp"
-                android:textColor="@android:color/white"
-                android:text="You are not a member ?"
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="sans-serif-light"
+                android:text="You are not a member ?"
+                android:textColor="@color/gray"
+                android:textSize="16dp"/>
 
             <TextView
-                android:textSize="15dp"
-                android:textColor="@color/colorRed"
-                android:text="Register"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Register"
+                android:textColor="@color/red"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/textView2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.984" />
 
-        </LinearLayout>
 
-    </LinearLayout>
-</RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
