@@ -40,6 +40,7 @@ public class EditUserFragment extends Fragment {
     EditText name,password,mobileno,email,dob,status;
     RadioButton gender;
     RadioGroup genderGroup;
+
     Button edituserbtn,cancelbtn;
 
     private static Api apiService;
@@ -53,7 +54,7 @@ public class EditUserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
         SimpleDateFormat f = new SimpleDateFormat("dd-mm-yyyy");
-        Date dobirth = null;
+        Date dobirth = new Date();
         try {
              dobirth = f.parse(getArguments().getString("dob"));
         } catch (ParseException e) {
@@ -61,7 +62,7 @@ public class EditUserFragment extends Fragment {
         }
 
         u=new UserList(Integer.parseInt(getArguments().getString("userid")),getArguments().getString("name"),getArguments().getString("password"),getArguments().getString("mobileno"),getArguments().getString("email"),dobirth,getArguments().getString("gender"),getArguments().getString("status"));
-
+        Log.e("###########3",u.email);
         final View view= inflater.inflate(R.layout.fragment_edit_user, container, false);
         apiService= ApiClient.getClient().create(Api.class);
 
@@ -72,7 +73,13 @@ public class EditUserFragment extends Fragment {
         dob = view.findViewById(R.id.dob);
         status = view.findViewById(R.id.status);
         genderGroup = view.findViewById(R.id.radioGender);
-
+        genderGroup.check(R.id.radioMale);
+        name.setText(u.name);
+        password.setText(u.password);
+        mobileno.setText(u.mobileno);
+        email.setText(u.email);
+        dob.setText(u.dob+"");
+        status.setText(u.status);
 
         edituserbtn=view.findViewById(R.id.edituserbtn);
         cancelbtn=view.findViewById(R.id.ecancelbtn);

@@ -76,7 +76,7 @@ public class UserFragment extends Fragment {
                     map.put("password",item.getPassword());
                     map.put("mobileno",item.getMobileno());
                     map.put("email",item.getEmail());
-                    map.put("dob",item.getDob().toString());
+                    map.put("dob",item.getDob()+"");
                     map.put("gender",item.getGender());
                     map.put("status",item.getStatus());
 
