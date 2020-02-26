@@ -2,6 +2,7 @@ package com.everfino.everfinoadmin.ApiConnection;
 
 import com.everfino.everfinoadmin.Model.AdminLoginResponse;
 import com.everfino.everfinoadmin.Model.RestList;
+import com.everfino.everfinoadmin.Model.UserList;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -35,6 +36,17 @@ public interface Api {
 
     @DELETE("rest/delete/{restid}")
     Call<RestList> delete_Rest(@Path("restid") int restid);
+
+
+    @GET("enduser/")
+    Call<List<UserList>> get_User();
+
+
+    @PUT("enduser/modify/{userid}")
+    Call<UserList> update_User(@Path("userid") int userid, @Body UserList obj);
+
+    @DELETE("enduser/delete/{userid}")
+    Call<UserList> delete_User(@Path("userid") int userid);
 
 
 }
