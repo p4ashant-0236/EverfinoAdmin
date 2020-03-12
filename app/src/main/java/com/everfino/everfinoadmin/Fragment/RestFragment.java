@@ -68,8 +68,7 @@ public class RestFragment extends Fragment {
         call.enqueue(new Callback<List<RestList>>() {
             @Override
             public void onResponse(Call<List<RestList>> call, Response<List<RestList>> response) {
-                Toast.makeText(getContext(), ""+response, Toast.LENGTH_SHORT).show();
-                for(RestList item: response.body()) {
+                 for(RestList item: response.body()) {
 
                     HashMap<String,String> map=new HashMap<>();
                      map.put("restid",item.getRestid()+"");

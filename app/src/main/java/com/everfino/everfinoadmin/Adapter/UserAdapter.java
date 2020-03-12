@@ -56,7 +56,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.Viewholder holder, int position) {
         map=ls.get(position);
-        holder.txtdemo.setText(map.get("name"));
+        holder.txtdemo.setText(map.get("name")+map.get("status"));
 
     }
 
@@ -148,7 +148,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
 
 
     }
-
+    public void filterList(List<HashMap<String,String>> ls)
+    {
+        this.ls=ls;
+        notifyDataSetChanged();
+    }
 
 }
 

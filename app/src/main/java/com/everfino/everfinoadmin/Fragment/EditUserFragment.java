@@ -115,13 +115,19 @@ public class EditUserFragment extends Fragment {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
                u.setDob(dobirth);
                 u.setStatus(status.getSelectedItem().toString());
                 int id = genderGroup.getCheckedRadioButtonId();
-                gender = view.findViewById(id);
+                if(id!=-1) {
 
-                u.setGender(gender.getText().toString());
+                    Log.e("$$", id + "   " + R.id.radioMale);
+                    gender = view.findViewById(id);
 
+                    u.setGender(gender.getText().toString());
+                }else {
+                    Toast.makeText(getActivity(), "Nothing Selected", Toast.LENGTH_SHORT).show();
+                }
                 Call<UserList> call=apiService.update_User(u.userid,u);
                 call.enqueue(new Callback<UserList>() {
 

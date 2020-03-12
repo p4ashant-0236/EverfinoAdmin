@@ -58,7 +58,7 @@ public class RestAdapter extends RecyclerView.Adapter<RestAdapter.Viewholder> {
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         map=ls.get(position);
-        holder.txtdemo.setText(map.get("restname"));
+        holder.txtdemo.setText(map.get("restname")+map.get("status"));
 
     }
 
