@@ -10,10 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.everfino.everfinoadmin.ApiConnection.Api;
@@ -37,10 +39,11 @@ public class EditUserFragment extends Fragment {
 
 
 
-    EditText name,password,mobileno,email,dob,status;
+    EditText name,password,mobileno,email,dob;
     RadioButton gender;
     RadioGroup genderGroup;
-
+    Spinner status;
+    String[] state = { "activate", "deactivate"};
     Button edituserbtn,cancelbtn;
 
     private static Api apiService;
@@ -73,13 +76,17 @@ public class EditUserFragment extends Fragment {
         dob = view.findViewById(R.id.dob);
         status = view.findViewById(R.id.status);
         genderGroup = view.findViewById(R.id.radioGender);
-        genderGroup.check(R.id.radioMale);
+
         name.setText(u.name);
         password.setText(u.password);
         mobileno.setText(u.mobileno);
         email.setText(u.email);
         dob.setText(u.dob+"");
-        status.setText(u.status);
+
+        ArrayAdapter aa = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,state);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        status.setAdapter(aa);
 
         edituserbtn=view.findViewById(R.id.edituserbtn);
         cancelbtn=view.findViewById(R.id.ecancelbtn);
@@ -109,7 +116,7 @@ public class EditUserFragment extends Fragment {
                     e.printStackTrace();
                 }
                u.setDob(dobirth);
-                u.setStatus(status.getText().toString());
+                u.setStatus(status.getSelectedItem().toString());
                 int id = genderGroup.getCheckedRadioButtonId();
                 gender = view.findViewById(id);
 

@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.everfino.everfinoadmin.ApiConnection.Api;
@@ -30,9 +32,10 @@ import retrofit2.Response;
 public class EditRestFragment extends Fragment {
 
 
-    EditText restname,restdesc,mobileno,city,email,status,address;
+    EditText restname,restdesc,mobileno,city,email,address;
     Button editrestbtn,cancelbtn;
-
+    Spinner status;
+    String[] state = { "activate", "deactivate"};
     private static Api apiService;
     RestList r;
     public EditRestFragment() {
@@ -57,12 +60,17 @@ public class EditRestFragment extends Fragment {
         status=view.findViewById(R.id.status);
         address=view.findViewById(R.id.address);
 
+        ArrayAdapter aa = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,state);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        status.setAdapter(aa);
+
         restname.setText(r.getRestname());
         restdesc.setText(r.getRestdesc());
         mobileno.setText(r.getMobileno());
         city.setText(r.getCity());
         email.setText(r.getEmail());
-        status.setText(r.getStatus());
+
         address.setText(r.getAddress());
 
         editrestbtn=view.findViewById(R.id.editrestbtn);
@@ -85,7 +93,7 @@ public class EditRestFragment extends Fragment {
                 r.setMobileno(mobileno.getText().toString());
                 r.setCity(city.getText().toString());
                 r.setEmail(email.getText().toString());
-                r.setStatus(status.getText().toString());
+                r.setStatus(status.getSelectedItem().toString());
                 r.setAddress(address.getText().toString());
 
                 Call<RestList> call=apiService.update_Rest(r.restid,r);
