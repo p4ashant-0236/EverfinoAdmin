@@ -149,6 +149,10 @@ public class RestAdapter extends RecyclerView.Adapter<RestAdapter.Viewholder> {
 
 
     }
-
+    public void filterList(List<HashMap<String,String>> ls)
+    {
+        this.ls=ls;
+        notifyDataSetChanged();
+    }
 
 }

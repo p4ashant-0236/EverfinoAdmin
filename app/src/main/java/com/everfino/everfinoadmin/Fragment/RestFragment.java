@@ -8,10 +8,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.everfino.everfinoadmin.Adapter.RestAdapter;
@@ -36,9 +39,10 @@ import retrofit2.Response;
 public class RestFragment extends Fragment {
 
 
-
+    RestAdapter adapter;
     RecyclerView rcv_rest;
     FloatingActionButton rest_add_btn;
+    EditText serarchrest;
     List<HashMap<String,String>> ls_menu=new ArrayList<>();
     private static Api apiService;
     public RestFragment() {
@@ -54,11 +58,41 @@ public class RestFragment extends Fragment {
         rcv_rest=view.findViewById(R.id.rcv_rest);
 
         apiService= ApiClient.getClient().create(Api.class);
+        serarchrest=view.findViewById(R.id.searchrest);
+        serarchrest.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         fetch_rest();
         return view;
     }
+    private void filter(String text) {
 
+        List<HashMap<String,String>> ls=new ArrayList<>();
+
+        for (HashMap<String,String> s : ls_menu) {
+            Log.e("abcccccc",s.toString());
+            if (s.toString().toLowerCase().contains(text.toLowerCase())) {
+                Log.e("true", String.valueOf(s));
+                ls.add(s);
+            }
+        }
+
+        adapter.filterList(ls);
+
+    }
     private void fetch_rest(){
 
         ls_menu.clear();
@@ -82,7 +116,7 @@ public class RestFragment extends Fragment {
                     ls_menu.add(map);
                 }
 
-                RestAdapter adapter=new RestAdapter(getContext(),ls_menu);
+                adapter=new RestAdapter(getContext(),ls_menu);
                 rcv_rest.setAdapter(adapter);
             }
 
