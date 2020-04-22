@@ -48,7 +48,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
     @Override
     public UserAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        final View view = inflater.inflate(R.layout.restlist_design, null);
+        final View view = inflater.inflate(R.layout.userlist_design, null);
 
         return new UserAdapter.Viewholder(view);
     }
@@ -56,7 +56,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.Viewholder holder, int position) {
         map=ls.get(position);
-        holder.txtdemo.setText(map.get("name")+map.get("status"));
+        holder.txt_username.setText(map.get("name"));
+        holder.txt_useremail.setText(map.get("email"));
+        holder.txt_usergender.setText(map.get("gender"));
+        holder.txt_usermobile.setText(map.get("mobileno"));
+        holder.txt_userstatus.setText(map.get("status"));
 
     }
 
@@ -67,14 +71,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView txtdemo;
+        TextView txt_username,txt_useremail,txt_usermobile,txt_usergender,txt_userstatus;
         private Api apiService;
 
 
         public Viewholder(@NonNull final View itemView) {
             super(itemView);
             apiService= ApiClient.getClient().create(Api.class);
-            txtdemo=itemView.findViewById(R.id.txtdemo);
+            txt_username=itemView.findViewById(R.id.txt_username);
+            txt_useremail=itemView.findViewById(R.id.txt_useremail);
+            txt_usergender=itemView.findViewById(R.id.txt_usergender);
+            txt_usermobile=itemView.findViewById(R.id.txt_usermobile);
+            txt_userstatus=itemView.findViewById(R.id.txt_userstatus);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

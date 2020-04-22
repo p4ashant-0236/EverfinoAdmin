@@ -40,8 +40,8 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_login = findViewById(R.id.btn_login);
 
-        apiService= ApiClient.getClient().create(Api.class);
-        appSharedPreferences=new AppSharedPreferences(this);
+        apiService = ApiClient.getClient().create(Api.class);
+        appSharedPreferences = new AppSharedPreferences(this);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,35 +57,38 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void admin_login() {
+        if (edt_usernme.getText().length() == 0) {
+            edt_usernme.setError("User Name is Required!");
+        } else if (edt_password.getText().length() == 0) {
+            edt_password.setError("Password is Required!");
+        } else {
+            JsonObject inputData = new JsonObject();
+            inputData.addProperty("username", edt_usernme.getText().toString());
+            inputData.addProperty("password", edt_password.getText().toString());
 
-        JsonObject inputData=new JsonObject();
-        inputData.addProperty("username",edt_usernme.getText().toString());
-        inputData.addProperty("password",edt_password.getText().toString());
+            Call<AdminLoginResponse> call = apiService.admin_login(inputData);
+            call.enqueue(new Callback<AdminLoginResponse>() {
+                @Override
+                public void onResponse(Call<AdminLoginResponse> call, Response<AdminLoginResponse> response) {
+                    progressDialog.dismiss();
+                    Log.e("####res", response.body().getStatus().toString());
+                    if (response.body().getStatus() == true) {
+                        appSharedPreferences.setPref(response.body().getAdminid(), response.body().getEmail());
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(i);
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "check username and password", Toast.LENGTH_LONG).show();
+                    }
 
-        Call<AdminLoginResponse> call = apiService.admin_login(inputData);
-        call.enqueue(new Callback<AdminLoginResponse>() {
-            @Override
-            public void onResponse(Call<AdminLoginResponse> call, Response<AdminLoginResponse> response) {
-                progressDialog.dismiss();
-                Log.e("####res",response.body().getStatus().toString());
-                if(response.body().getStatus()==true) {
-                    appSharedPreferences.setPref(response.body().getAdminid(), response.body().getEmail());
-                    Intent i=new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(i);
-                    finish();
                 }
-                else
-                {
-                    Toast.makeText(LoginActivity.this, "check username and password", Toast.LENGTH_LONG).show();
+
+                @Override
+                public void onFailure(Call<AdminLoginResponse> call, Throwable t) {
+                    progressDialog.dismiss();
+                    Log.e("####err", t.toString());
                 }
-
-            }
-
-            @Override
-            public void onFailure(Call<AdminLoginResponse> call, Throwable t) {
-                progressDialog.dismiss();
-                Log.e("####err",t.toString());
-            }
-        });
+            });
+        }
     }
 }

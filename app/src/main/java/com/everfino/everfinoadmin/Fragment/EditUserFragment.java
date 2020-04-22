@@ -38,16 +38,16 @@ import retrofit2.Response;
 public class EditUserFragment extends Fragment {
 
 
-
-    EditText name,password,mobileno,email,dob;
+    EditText name, password, mobileno, email, dob;
     RadioButton gender;
     RadioGroup genderGroup;
     Spinner status;
-    String[] state = { "activate", "deactivate"};
-    Button edituserbtn,cancelbtn;
+    String[] state = {"activate", "deactivate"};
+    Button edituserbtn, cancelbtn;
 
     private static Api apiService;
     UserList u;
+
     public EditUserFragment() {
         // Required empty public constructor
     }
@@ -59,15 +59,15 @@ public class EditUserFragment extends Fragment {
         SimpleDateFormat f = new SimpleDateFormat("dd-mm-yyyy");
         Date dobirth = new Date();
         try {
-             dobirth = f.parse(getArguments().getString("dob"));
+            dobirth = f.parse(getArguments().getString("dob"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        u=new UserList(Integer.parseInt(getArguments().getString("userid")),getArguments().getString("name"),getArguments().getString("password"),getArguments().getString("mobileno"),getArguments().getString("email"),dobirth,getArguments().getString("gender"),getArguments().getString("status"));
-        Log.e("###########3",u.email);
-        final View view= inflater.inflate(R.layout.fragment_edit_user, container, false);
-        apiService= ApiClient.getClient().create(Api.class);
+        u = new UserList(Integer.parseInt(getArguments().getString("userid")), getArguments().getString("name"), getArguments().getString("password"), getArguments().getString("mobileno"), getArguments().getString("email"), dobirth, getArguments().getString("gender"), getArguments().getString("status"));
+        Log.e("###########3", u.email);
+        final View view = inflater.inflate(R.layout.fragment_edit_user, container, false);
+        apiService = ApiClient.getClient().create(Api.class);
 
         name = view.findViewById(R.id.name);
         password = view.findViewById(R.id.password);
@@ -81,19 +81,19 @@ public class EditUserFragment extends Fragment {
         password.setText(u.password);
         mobileno.setText(u.mobileno);
         email.setText(u.email);
-        dob.setText(u.dob+"");
+        dob.setText(u.dob + "");
 
-        ArrayAdapter aa = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,state);
+        ArrayAdapter aa = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, state);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         status.setAdapter(aa);
 
-        edituserbtn=view.findViewById(R.id.edituserbtn);
-        cancelbtn=view.findViewById(R.id.ecancelbtn);
+        edituserbtn = view.findViewById(R.id.edituserbtn);
+        cancelbtn = view.findViewById(R.id.ecancelbtn);
         cancelbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment=new RestFragment();
+                Fragment fragment = new RestFragment();
 
                 loadFragment(fragment);
             }
@@ -103,51 +103,61 @@ public class EditUserFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-                u.setName(name.getText().toString());
-                u.setPassword(password.getText().toString());
-                u.setMobileno(mobileno.getText().toString());
-                u.setEmail(email.getText().toString());
-                SimpleDateFormat f = new SimpleDateFormat("dd-mm-yyyy");
-                Date dobirth = null;
-                try {
-                    dobirth = f.parse(dob.getText().toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-               u.setDob(dobirth);
-                u.setStatus(status.getSelectedItem().toString());
-                int id = genderGroup.getCheckedRadioButtonId();
-                if(id!=-1) {
-
-                    Log.e("$$", id + "   " + R.id.radioMale);
-                    gender = view.findViewById(id);
-
-                    u.setGender(gender.getText().toString());
-                }else {
-                    Toast.makeText(getActivity(), "Nothing Selected", Toast.LENGTH_SHORT).show();
-                }
-                Call<UserList> call=apiService.update_User(u.userid,u);
-                call.enqueue(new Callback<UserList>() {
-
-                    @Override
-                    public void onResponse(Call<UserList> call, Response<UserList> response) {
-                        Log.e("###","----------------------");
-
-                        Toast.makeText(getContext(), "edited", Toast.LENGTH_SHORT).show();
-                        Fragment fragment=new UserFragment();
-
-                        loadFragment(fragment);
+                if (name.getText().length() == 0) {
+                    name.setError("Name is Required!");
+                } else if (password.getText().length() == 0) {
+                    password.setError("Password is Required!");
+                } else if (mobileno.getText().length() == 0) {
+                    mobileno.setError("Mobile No is Required!");
+                } else if (email.getText().length() == 0) {
+                    email.setError("Email is Required!");
+                } else {
+                    u.setName(name.getText().toString());
+                    u.setPassword(password.getText().toString());
+                    u.setMobileno(mobileno.getText().toString());
+                    u.setEmail(email.getText().toString());
+                    SimpleDateFormat f = new SimpleDateFormat("dd-mm-yyyy");
+                    Date dobirth = null;
+                    try {
+                        dobirth = f.parse(dob.getText().toString());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
 
-                    @Override
-                    public void onFailure(Call<UserList> call, Throwable t) {
-                        Toast.makeText(getContext(), t.toString()+"Try Again", Toast.LENGTH_SHORT).show();
+                    u.setDob(dobirth);
+                    u.setStatus(status.getSelectedItem().toString());
+                    int id = genderGroup.getCheckedRadioButtonId();
+                    if (id != -1) {
+
+                        Log.e("$$", id + "   " + R.id.radioMale);
+                        gender = view.findViewById(id);
+
+                        u.setGender(gender.getText().toString());
+                    } else {
+                        Toast.makeText(getActivity(), "Nothing Selected", Toast.LENGTH_SHORT).show();
                     }
-                });
+                    Call<UserList> call = apiService.update_User(u.userid, u);
+                    call.enqueue(new Callback<UserList>() {
+
+                        @Override
+                        public void onResponse(Call<UserList> call, Response<UserList> response) {
+                            Log.e("###", "----------------------");
+
+                            Toast.makeText(getContext(), "edited", Toast.LENGTH_SHORT).show();
+                            Fragment fragment = new UserFragment();
+
+                            loadFragment(fragment);
+                        }
+
+                        @Override
+                        public void onFailure(Call<UserList> call, Throwable t) {
+                            Toast.makeText(getContext(), t.toString() + "Try Again", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
+
         return view;
     }
 

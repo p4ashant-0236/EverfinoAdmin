@@ -48,5 +48,11 @@ public interface Api {
     @DELETE("enduser/delete/{userid}")
     Call<UserList> delete_User(@Path("userid") int userid);
 
+    @GET("admin/{adminid}")
+    Call<AdminLoginResponse> get_Admin(@Path("adminid") int adminid);
+
+    @PUT("admin/modify/{adminid}")
+    Call<AdminLoginResponse> update_Admin(@Path("adminid") int adminid,@Body AdminLoginResponse obj);
+
 
 }

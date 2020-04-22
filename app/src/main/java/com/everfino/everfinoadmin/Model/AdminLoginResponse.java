@@ -4,7 +4,15 @@ public class AdminLoginResponse {
     private Boolean status;
     private int adminid;
     private String mobileno;
-    private String email;
+    private String email,password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Boolean getStatus() {
         return status;

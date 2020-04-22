@@ -58,7 +58,13 @@ public class RestAdapter extends RecyclerView.Adapter<RestAdapter.Viewholder> {
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         map=ls.get(position);
-        holder.txtdemo.setText(map.get("restname")+map.get("status"));
+
+        holder.txt_restname.setText(map.get("restname"));
+        holder.txt_restdesc.setText(map.get("restdesc"));
+        holder.txt_restemail.setText(map.get("email"));
+        holder.txt_restmobile.setText(map.get("mobileno"));
+        holder.txt_reststatus.setText(map.get("status"));
+        holder.txt_restcity.setText(map.get("city"));
 
     }
 
@@ -69,14 +75,20 @@ public class RestAdapter extends RecyclerView.Adapter<RestAdapter.Viewholder> {
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView txtdemo;
+        TextView txt_restname,txt_restdesc,txt_restcity,txt_reststatus,txt_restemail,txt_restmobile;
         private Api apiService;
 
 
         public Viewholder(@NonNull final View itemView) {
             super(itemView);
             apiService= ApiClient.getClient().create(Api.class);
-            txtdemo=itemView.findViewById(R.id.txtdemo);
+            txt_restname=itemView.findViewById(R.id.txt_restname);
+            txt_restdesc=itemView.findViewById(R.id.txt_restdesc);
+            txt_restcity=itemView.findViewById(R.id.txt_restcity);
+            txt_restmobile=itemView.findViewById(R.id.txt_restmobile);
+            txt_restemail=itemView.findViewById(R.id.txt_restemail);
+            txt_reststatus=itemView.findViewById(R.id.txt_reststatus);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
