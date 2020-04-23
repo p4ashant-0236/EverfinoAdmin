@@ -60,8 +60,8 @@ public class RestAdapter extends RecyclerView.Adapter<RestAdapter.Viewholder> {
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         map=ls.get(position);
-        if(map.get("status").equals("Active")){
-            holder.side_bar.setBackgroundColor(Color.parseColor("#00FF00"));
+        if(map.get("status").equals("Activate")){
+            holder.side_bar.setBackgroundColor(Color.parseColor("#008900"));
         }else {
             holder.side_bar.setBackgroundColor(Color.parseColor("#FF0000"));
         }

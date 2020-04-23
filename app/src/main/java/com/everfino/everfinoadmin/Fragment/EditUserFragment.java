@@ -42,7 +42,7 @@ public class EditUserFragment extends Fragment {
     RadioButton gender;
     RadioGroup genderGroup;
     Spinner status;
-    String[] state = {"activate", "deactivate"};
+    String[] state = {"Activate", "Deactivate"};
     Button edituserbtn, cancelbtn;
 
     private static Api apiService;

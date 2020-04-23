@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Edit User "
+
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,12 +24,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Edit User "
-                android:textAlignment="center"
-                android:textSize="30dp" />
+
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -98,7 +101,9 @@
             <RadioGroup
                 android:id="@+id/radioGender"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                >
 
                         <RadioButton
                             android:id="@+id/radioMale"

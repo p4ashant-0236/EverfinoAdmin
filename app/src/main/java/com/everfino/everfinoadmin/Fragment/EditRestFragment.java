@@ -35,7 +35,7 @@ public class EditRestFragment extends Fragment {
     EditText restname, restdesc, mobileno, city, email, address;
     Button editrestbtn, cancelbtn;
     Spinner status;
-    String[] state = {"activate", "deactivate"};
+    String[] state = {"Activate", "Deactivate"};
     private static Api apiService;
     RestList r;
 
