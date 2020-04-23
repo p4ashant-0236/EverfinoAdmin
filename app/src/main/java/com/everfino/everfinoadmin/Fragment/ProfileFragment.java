@@ -148,7 +148,7 @@ public class ProfileFragment extends Fragment {
             epassword.setError("Password is Required!");
         } else if (eemail.getText().length() == 0) {
             eemail.setError("Email is Required!");
-        } else if (epassword.getText().toString() != cepassword.getText().toString()) {
+        } else if (epassword.getText().length() != cepassword.getText().length()) {
             cepassword.setError("Confirm password is not same as password");
         } else {
             a.setMobileno(emobileno.getText().toString());
