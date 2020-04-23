@@ -2,10 +2,12 @@ package com.everfino.everfinoadmin.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,11 +58,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
     @Override
     public void onBindViewHolder(@NonNull UserAdapter.Viewholder holder, int position) {
         map=ls.get(position);
+        if(map.get("status").equals("Active")){
+            holder.side_bar.setBackgroundColor(Color.parseColor("#00FF00"));
+        }else {
+            holder.side_bar.setBackgroundColor(Color.parseColor("#FF0000"));
+        }
         holder.txt_username.setText(map.get("name"));
         holder.txt_useremail.setText(map.get("email"));
         holder.txt_usergender.setText(map.get("gender"));
         holder.txt_usermobile.setText(map.get("mobileno"));
-        holder.txt_userstatus.setText(map.get("status"));
+
 
     }
 
@@ -71,8 +78,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView txt_username,txt_useremail,txt_usermobile,txt_usergender,txt_userstatus;
+        TextView txt_username,txt_useremail,txt_usermobile,txt_usergender;
         private Api apiService;
+        LinearLayout side_bar;
 
 
         public Viewholder(@NonNull final View itemView) {
@@ -82,7 +90,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
             txt_useremail=itemView.findViewById(R.id.txt_useremail);
             txt_usergender=itemView.findViewById(R.id.txt_usergender);
             txt_usermobile=itemView.findViewById(R.id.txt_usermobile);
-            txt_userstatus=itemView.findViewById(R.id.txt_userstatus);
+
+            side_bar=itemView.findViewById(R.id.side_bar);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

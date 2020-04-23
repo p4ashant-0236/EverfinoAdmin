@@ -3,11 +3,13 @@ package com.everfino.everfinoadmin.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,12 +60,16 @@ public class RestAdapter extends RecyclerView.Adapter<RestAdapter.Viewholder> {
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         map=ls.get(position);
-
+        if(map.get("status").equals("Active")){
+            holder.side_bar.setBackgroundColor(Color.parseColor("#00FF00"));
+        }else {
+            holder.side_bar.setBackgroundColor(Color.parseColor("#FF0000"));
+        }
         holder.txt_restname.setText(map.get("restname"));
         holder.txt_restdesc.setText(map.get("restdesc"));
         holder.txt_restemail.setText(map.get("email"));
         holder.txt_restmobile.setText(map.get("mobileno"));
-        holder.txt_reststatus.setText(map.get("status"));
+
         holder.txt_restcity.setText(map.get("city"));
 
     }
@@ -75,8 +81,9 @@ public class RestAdapter extends RecyclerView.Adapter<RestAdapter.Viewholder> {
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView txt_restname,txt_restdesc,txt_restcity,txt_reststatus,txt_restemail,txt_restmobile;
+        TextView txt_restname,txt_restdesc,txt_restcity,txt_restemail,txt_restmobile;
         private Api apiService;
+        LinearLayout side_bar;
 
 
         public Viewholder(@NonNull final View itemView) {
@@ -87,7 +94,7 @@ public class RestAdapter extends RecyclerView.Adapter<RestAdapter.Viewholder> {
             txt_restcity=itemView.findViewById(R.id.txt_restcity);
             txt_restmobile=itemView.findViewById(R.id.txt_restmobile);
             txt_restemail=itemView.findViewById(R.id.txt_restemail);
-            txt_reststatus=itemView.findViewById(R.id.txt_reststatus);
+            side_bar=itemView.findViewById(R.id.side_bar);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

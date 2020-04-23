@@ -4,117 +4,96 @@
     android:id="@+id/recylce_card"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:orientation="vertical"
-    android:layout_margin="20dp">
+    android:layout_margin="20dp"
+    android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        app:cardCornerRadius="8dp"
-        android:layout_marginTop="20dp"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:background="#FFFFFF"
+            android:orientation="horizontal">
 
             <LinearLayout
+                android:background="#00FF00"
+                android:id="@+id/side_bar"
+                android:layout_width="15dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingLeft="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFFFFF"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
                     android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:id="@+id/side_bar"
-                        android:layout_width="15dp"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/txt_restname"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:background="#FFFFFF"
-                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/txt_restname"
-                                android:layout_width="250dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:text="TITLE"
-                                android:textColor="#000000"
-                                android:textSize="18sp" />
+                        android:text="TITLE"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
 
 
-                            <TextView
-                                android:id="@+id/txt_reststatus"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
 
-                                android:text="Deactive"
-                                android:textColor="#000000"
-                                android:textSize="15dp" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/txt_restdesc"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="Description"
-                            android:textColor="#000000"
-                            android:textSize="12sp" />
-
-
-                        <TextView
-                            android:id="@+id/txt_restemail"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:paddingLeft="7dp"
-                            android:text="By Admin"
-                            android:textColor="#000000"
-                            android:textSize="12dp" />
-
-                        <TextView
-                            android:id="@+id/txt_restmobile"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:paddingLeft="7dp"
-                            android:text="1234567890"
-
-                            android:textColor="#000000"
-                            android:textSize="12dp" />
-
-
-                    </LinearLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_restdesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="Description"
+                    android:textColor="#000000"
+                    android:textSize="12sp" />
 
 
                 <TextView
+                    android:id="@+id/txt_restemail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textColor="#000000"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/txt_restmobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="1234567890"
+
+                    android:textColor="#000000"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:textSize="12dp"
                     android:id="@+id/txt_restcity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
                     android:text="City"
                     android:textColor="#000000" />
-
-
             </LinearLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+
+
+
+
+    </LinearLayout>
+
 </LinearLayout>
