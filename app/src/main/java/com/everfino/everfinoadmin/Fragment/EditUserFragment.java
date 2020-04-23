@@ -1,6 +1,7 @@
 package com.everfino.everfinoadmin.Fragment;
 
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,6 +28,7 @@ import com.everfino.everfinoadmin.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -44,6 +47,8 @@ public class EditUserFragment extends Fragment {
     Spinner status;
     String[] state = {"Activate", "Deactivate"};
     Button edituserbtn, cancelbtn;
+    Button select_date;
+    int mYear, mMonth, mDay;
 
     private static Api apiService;
     UserList u;
@@ -76,6 +81,12 @@ public class EditUserFragment extends Fragment {
         dob = view.findViewById(R.id.dob);
         status = view.findViewById(R.id.status);
         genderGroup = view.findViewById(R.id.radioGender);
+        select_date=view.findViewById(R.id.select_date);
+
+        dob.setEnabled(false);
+        mDay= Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        mMonth=Calendar.getInstance().get(Calendar.MONTH);
+        mYear=Calendar.getInstance().get(Calendar.YEAR);
 
         name.setText(u.name);
         password.setText(u.password);
@@ -96,6 +107,19 @@ public class EditUserFragment extends Fragment {
                 Fragment fragment = new RestFragment();
 
                 loadFragment(fragment);
+            }
+        });
+
+        select_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dataDialog=new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        dob.setText(date+"-"+month+"-"+year);
+                    }
+                },mYear,mMonth,mDay);
+                dataDialog.show();
             }
         });
 
