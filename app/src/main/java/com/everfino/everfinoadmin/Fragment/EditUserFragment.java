@@ -116,12 +116,13 @@ public class EditUserFragment extends Fragment {
                 DatePickerDialog dataDialog=new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        dob.setText(date+"-"+month+"-"+year);
+                        dob.setText(year+"-"+month+"-"+date);
                     }
                 },mYear,mMonth,mDay);
                 dataDialog.show();
             }
         });
+
 
         edituserbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,15 +141,6 @@ public class EditUserFragment extends Fragment {
                     u.setPassword(password.getText().toString());
                     u.setMobileno(mobileno.getText().toString());
                     u.setEmail(email.getText().toString());
-                    SimpleDateFormat f = new SimpleDateFormat("dd-mm-yyyy");
-                    Date dobirth = null;
-                    try {
-                        dobirth = f.parse(dob.getText().toString());
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-
-                    u.setDob(dobirth);
                     u.setStatus(status.getSelectedItem().toString());
                     int id = genderGroup.getCheckedRadioButtonId();
                     if (id != -1) {
